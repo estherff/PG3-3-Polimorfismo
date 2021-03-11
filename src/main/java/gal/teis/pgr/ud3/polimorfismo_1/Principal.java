@@ -17,6 +17,8 @@ public class Principal {
     public static void main(String[] args) {
         sin_polimorfismo();
         polimorfismo();
+        polimorfismo_Arrays();
+        polimosfismo_Parametros();
 
     }
     

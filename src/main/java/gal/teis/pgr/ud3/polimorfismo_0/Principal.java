@@ -12,8 +12,9 @@ package gal.teis.pgr.ud3.polimorfismo_0;
 public class Principal {
 
     /**
-     * Método estático que ejecuta el método afinar() de cada objeto
-     * que se pasa por parámetro. Usa polimorfismo en el paso de parámetros
+     * Método estático que ejecuta el método afinar() de cada objeto que se pasa
+     * por parámetro. Usa polimorfismo en el paso de parámetros
+     *
      * @param i Instrumento
      */
     static void afinar(Instrumento i) {
@@ -22,9 +23,10 @@ public class Principal {
     }
 
     /**
-     * Llama al método estático afinar de esta clase que usa el polimorfismo en 
-     * el paso de parámetros 
-     * @param e Array de Instrumento 
+     * Llama al método estático afinar de esta clase que usa el polimorfismo en
+     * el paso de parámetros
+     *
+     * @param e Array de Instrumento
      */
     static void afinarTodo(Instrumento[] e) {
 
@@ -34,6 +36,7 @@ public class Principal {
     }
 
     public static void main(String[] args) {
+
         Instrumento[] orquesta = new Instrumento[4];
         int i = 0;
         // Up-casting al asignarse el Arreglo

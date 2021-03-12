@@ -15,19 +15,20 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        sin_polimorfismo();
-        polimorfismo();
-        polimorfismo_Arrays();
-        polimosfismo_Parametros();
+//        sin_polimorfismo();
+//        polimorfismo();
+//        polimorfismo_Arrays();
+//        polimosfismo_Parametros();
+        usoInstanceof();
 
     }
-    
+
     /*
     Sin polimorfismo, se crea un ojeto de cada clase. Solo se usan las propiedades 
     clásica de la herencia
-    */
+     */
     public static void sin_polimorfismo() {
-        
+
         //Objetos y llamadas a métodos sin usar polimorfismo
         Asalariado emplead1 = new Asalariado("Manuel Cortina", "12345678W", 28, 1200);
         EmpleadoProduccion emplead2 = new EmpleadoProduccion("Juan Mota", "55333222L", 30, 1200, "noche");
@@ -52,8 +53,8 @@ public class Principal {
     }
 
     /**
-     * Uso de polimorfismo básico
-     * Cada instancia llama métodos override propios y métodos heredados de Asalariado
+     * Uso de polimorfismo básico Cada instancia llama métodos override propios
+     * y métodos heredados de Asalariado
      */
     public static void polimorfismo() {
         Asalariado emplead1 = new EmpleadoDistribucion("Manuel Cortina", "12345678W", 28, 1700, "norte");
@@ -61,7 +62,7 @@ public class Principal {
 
         /*Cada instancia llama a los métodos de Asalariado (superclase) y a los
         métodos de la subclase que son overriding
-        */
+         */
         System.out.println("El nombre del empleado 1 es "
                 + emplead1.getNombre());//getNombre() está definido en Asalariado (superclase)
         System.out.println("El sueldo del empleado 1 es "
@@ -70,20 +71,18 @@ public class Principal {
                 + emplead2.getNombre());//getNombre() está definido en Asalariado (superclase)
         System.out.println("El sueldo del empleado 2 es "
                 + emplead2.getSalario());//getSalario() está override en EmpleadoProduccion (subclase)
-        
+
         //Indica por qué la siguiente instrucción es errónea
 //        System.out.println("El turno del empleado 2 es " 
 //                +emplead2.getTurno);
     }
 
-   
-
-      /**
-     * Polimorfismo/Arrays. Si el tipo del array es una superclase, 
-     * se pueden almacenar elementos de las clases derivadas aplicando el polimorfismo
+    /**
+     * Polimorfismo/Arrays. Si el tipo del array es una superclase, se pueden
+     * almacenar elementos de las clases derivadas aplicando el polimorfismo
      */
-     public static void polimorfismo_Arrays() {
-         //Objetos y llamadas a métodos sin usar polimorfismo
+    public static void polimorfismo_Arrays() {
+        //Objetos y llamadas a métodos sin usar polimorfismo
         Asalariado emplead1 = new Asalariado("Manuel Cortina", "12345678W", 28, 1200);
         EmpleadoProduccion emplead2 = new EmpleadoProduccion("Juan Mota", "55333222L", 30, 1200, "noche");
         EmpleadoDistribucion emplead3 = new EmpleadoDistribucion("Antonio Camino", "55333666P", 35, 1200, "Granada");
@@ -105,7 +104,7 @@ public class Principal {
         es la superclase que determina los método que pueden ser llamados por polimorfismo
          */
         //System.out.println("La region	del emplead3 es"+ array_asal[2].getRegion() );
-         //System.out.println("El turno del emplead3 es"+ array_asal[1].getTurno() );
+        //System.out.println("El turno del emplead3 es"+ array_asal[1].getTurno() );
     }
 
     /**
@@ -115,7 +114,6 @@ public class Principal {
         Asalariado emplead1 = new Asalariado("Manuel Cortina", "12345678W", 28, 1200);
         EmpleadoProduccion emplead2 = new EmpleadoProduccion("Juan Mota", "55333222L", 30, 1200, "noche");
         EmpleadoDistribucion emplead3 = new EmpleadoDistribucion("Antonio Camino", "55333666P", 35, 1200, "Granada");
-
 
         mostrarSalario(emplead1);
         mostrarSalario(emplead2);
@@ -128,14 +126,45 @@ public class Principal {
                 + asl.getSalario());
         System.out.println("El resultado de aplicarle la retencion es "
                 + asl.getSalario() * 0.15);
-        
-         /*
+
+        /*
         No se puede llamar a getRegion ni a getTurno() porque no está definido en Asalariado que
         es la superclase que determina los método que pueden ser llamados por polimorfismo
          */
         //System.out.println("La region	del emplead3 es"+ array_asal[2].getRegion() );
-         //System.out.println("El turno del emplead3 es"+ array_asal[1].getTurno() );
-
+        //System.out.println("El turno del emplead3 es"+ array_asal[1].getTurno() );
     }
 
+    public static void usoInstanceof() {
+        //Objetos y llamadas a métodos sin usar polimorfismo
+        Asalariado emplead1 = new Asalariado("Manuel Cortina", "12345678W", 28, 1200);
+        EmpleadoProduccion emplead2 = new EmpleadoProduccion("Juan Mota", "55333222L", 30, 1200, "noche");
+        EmpleadoDistribucion emplead3 = new EmpleadoDistribucion("Antonio Camino", "55333666P", 35, 1200, "Granada");
+
+        //Array de tipo de la superclase Asalariado
+        Asalariado[] array_asal = new Asalariado[3];
+
+        array_asal[0] = emplead1;
+        array_asal[1] = emplead2;
+        array_asal[2] = emplead3;
+
+        for (int i = 0; i < 3; i++) {
+            /*No puedo acceder a los métodos propios de EmpeladoProudccion ni de EmpleadoDistribucion
+            salvo los que tienen sobrescritos
+             */
+            System.out.println("El sueldo del trabajador " + i + " es "
+                    + array_asal[i].getSalario()); //llamadas polimórficas a métodos
+        }
+
+        /*Si quiero acceder al turno de EmpeladoProudccion y a la zona de EmpleadoDistribucion*/
+        for (int i = 0; i < 3; i++) {
+            if (array_asal[i] instanceof EmpleadoProduccion) {
+                EmpleadoProduccion empP = (EmpleadoProduccion) array_asal[i];
+                System.out.println(empP.getNombre() + " tiene el turno de " + empP.getTurno());
+            } else if (array_asal[i] instanceof EmpleadoDistribucion) {
+                EmpleadoDistribucion empD = (EmpleadoDistribucion) array_asal[i];
+                System.out.println(empD.getNombre() + " trabaja en la zona " + empD.getRegion());
+            }
+        }
+    }
 }
